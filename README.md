@@ -58,16 +58,16 @@ Using CSVs also mean that we are leaving strict type checking and validation
 for, possibly, a later version. But this should be fine for some time since
 there is a single team owning all the work here.
 
-### 1. Call data
+### 1. Call dataframe
 For reporting or other downstream tasks, we provide internal tools to get Call
 dataframes. You will also have tools for extracting turn dataframes and simpler
 structures for doing more stateless ML work.
 
-### 2. Turn data
+### 2. Turn dataframe
 Turn dataframes mostly need tools for sourcing and pushing to labeling
 interfaces.
 
-### 3. Labels
+### 3. Label dataframe
 Labels are kept in separate CSV files which are usually in sequential sync with
 the main dataframes. These are packed together with the main dataframes to build
 supervised datasets.
