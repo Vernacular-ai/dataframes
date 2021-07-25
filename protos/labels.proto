@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package labels;
+
+import "google/protobuf/any.proto";
