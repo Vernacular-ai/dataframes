@@ -84,9 +84,3 @@ message Utterance {
   }
   repeated Alternative alternatives = 1;
 }
-
-message Audio {
-  uint32 id = 1;
-  string audio_base_path = 2;
-  string audio_identifier = 3;
-}
