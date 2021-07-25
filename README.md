@@ -49,4 +49,29 @@ Recommended method is to keep these layers in separate files than records. See
 the section on _Common Patterns_ for more details.
 
 ## Common Patterns
-...
+In our day to day work, the above structure will impact the tools and involved
+file formats. At the moment, we have decided to use CSVs as the file for keeping
+records and label layers. You can work around with joins between them easily
+using tools like [xsv](https://github.com/BurntSushi/xsv).
+
+Using CSVs also mean that we are leaving strict type checking and validation
+for, possibly, a later version. But this should be fine for some time since
+there is a single team owning all the work here.
+
+### 1. Working with Call data
+For reporting or other downstream tasks, we provide internal tools to get Call
+dataframes. You will also have tools for extracting turn dataframes and simpler
+structures for doing more stateless ML work.
+
+### 2. Working with Turn data
+Turn dataframes mostly need tools for sourcing and pushing to labeling
+interfaces.
+
+### 3. Labels
+Labels are kept in separate CSV files which are usually in sequential sync with
+the main dataframes. These are packed together with the main dataframes to build
+supervised datasets.
+
+In cases where a comparison with model prediction is needed and the predictions
+are within the records, we slice them out in a separate label file as tools like
+[eevee](https://github.com/Vernacular-ai/eevee) work on label files only.
