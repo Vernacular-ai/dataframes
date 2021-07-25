@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package records;
+
+import "google/protobuf/any.proto";
+
+/* Representation of one full call */
+message Call {
+  uint32 id = 1;                // ID as stored in database
+  string uuid = 2;              // UUID generated during object creation in the
+                                // runtime system
+  string created_at = 3;
+  string caller_number = 4;
+  string virtual_number = 5;    // Receiving phone number
+  string audio_base_path = 6;
+  string audio_identifier = 7;  // For full call audio. Prepend with
+                                // `audio_base_path`.
+  float duration = 8;
+  string flow_version = 9;
+  repeated Turn turns = 10;
+  string experiment_group = 11;  // Field experimentation group allocation
+                                 // information. Interpretation is left to the
+                                 // user as of now
+                                 // TODO: This needs to be clarified once we
+                                 // upgrade our field testing system.
+}
+
+/* One turn in the call. This can be a bot or user turn. */
+message Turn {
+  uint32 id = 1;
+  string uuid = 2;
+  string created_at = 3;
+  enum Type {
+    UNKNOWN = 0;
+    ACTION = 1;
+    INPUT = 2;
+    RESPONSE = 3;
+    VALIDATION = 4;
+  }
+  Type type = 4;                          // Type of turn. For ML we are mostly
+                                          // interested in `INPUT` and sub_type
+                                          // `AUDIO`.
+  string sub_type = 5;
+  string text = 6;                        // Top level representative text for
+                                          // the turn
+  repeated Utterance utterances = 7;      // List of utterances from ASR
+  string audio_base_path = 8;
+  string audio_identifier = 9;            // Path to the turn audio, if present.
+                                          // Prepend with `audio_base_path`.
+  string state = 10;                      // State of the turn in the call flow.
+  string asr_context = 11 ;               // Context identifiers passed to the
+                                          // ASR.
+  string asr_provider = 12;
+  string language = 13;                   // Native language of the bot
+  Prediction prediction = 14;             // Prediction made from the system
+                                          // during the actual call.
+  string experiment_group = 15;           // Field experimentation group
+                                          // allocation information.
+                                          // Interpretation is left to the user
+                                          // as of now.
+}
+
+message Prediction {
+  repeated Intent intents = 1;
+}
+
+message Intent {
+  string name = 1;
+  float score = 2;
+  message Slot {
+    string name = 1;
+    string type = 2;
+    repeated google.protobuf.Any values = 3;
+  }
+  repeated Slot slots = 3;
+}
+
+message Utterance {
+  message Alternative {
+    string transcript = 1;
+    float confidence = 2;
+    float am_score = 3;
+    float lm_score = 4;
+  }
+  repeated Alternative alternatives = 1;
+}
+
+message Audio {
+  uint32 id = 1;
+  string audio_base_path = 2;
+  string audio_identifier = 3;
+}
