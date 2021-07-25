@@ -58,12 +58,12 @@ Using CSVs also mean that we are leaving strict type checking and validation
 for, possibly, a later version. But this should be fine for some time since
 there is a single team owning all the work here.
 
-### 1. Working with Call data
+### 1. Call data
 For reporting or other downstream tasks, we provide internal tools to get Call
 dataframes. You will also have tools for extracting turn dataframes and simpler
 structures for doing more stateless ML work.
 
-### 2. Working with Turn data
+### 2. Turn data
 Turn dataframes mostly need tools for sourcing and pushing to labeling
 interfaces.
 
