@@ -4,35 +4,25 @@ package labels;
 
 import "google/protobuf/any.proto";
 
-// TODO: For most of the labels, we need the following types of label structs
-//       - Single, Structural, Ranking
-
-// eevee --wer <ref-labels.csv> <pred-labels.csv>
-// eevee --wer@3 ...
-
-// eevee --intent <ref-labels-csv> <pred-labels-csv>
-
-// client.intents.csv
-// id, intent, score
-//  1,  block,   0.9
-// ...
-
-// client.acoustic-intents.csv
-// id, intent, score
-//  2,  noisy,   0.6
-// ...
-
+/* A simple intent annotation. Intents here are from a fixed set. For marking
+   absence of an intent, we use null. We skip label if item is untagged. */
 message IntentLabel {
   uint32 id = 1;
   string intent = 2;
-  float score = 3;
 }
 
-// client.entities.csv
-// id, entities
-//  1, [{"type": "date", "score": 0.1, "value": {}}]
-//  2, []
-//  3, []
+/* Similar to intent but allows richer labels. Two common patterns are described
+   below:
+
+   1. Multiple intents: {"op": "AND", "items": [{"intent": "<>": "score": "<>"},
+      ...]}
+
+   2. Ranked intents: [{"intent": "<>": "score": "<>"}, {"intent": "<>":
+      "score": "<>"}, ...] */
+message RichIntentLabel {
+  uint32 id = 1;
+  google.protobuf.Any rich_intent = 2;
+}
 
 message EntityLabel {
   uint32 id = 1;
