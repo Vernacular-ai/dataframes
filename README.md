@@ -1,5 +1,7 @@
 # dataframes
 
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Vernacular-ai/dataframes?style=flat-square)
+
 Formats and schemata for data exchange at Vernacular.ai for Machine Learning
 tasks. Here we define suggested ways of organizing data and labels for various
 ML tasks that we work on day to day basis.
