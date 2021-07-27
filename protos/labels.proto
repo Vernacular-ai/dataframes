@@ -25,15 +25,28 @@ message RichIntentLabel {
   google.protobuf.Any rich_intent = 2;
 }
 
+/* Entities or slots. Can merge multiple entities in one. If they are
+   independent, it's recommended to make new layer. */
 message EntityLabel {
   uint32 id = 1;
   repeated Entity entities = 2;
 }
 
+/* An entity definition. */
 message Entity {
   string type = 1;
   float score = 2;
-  google.protobuf.Any value = 3; // Null here means that this entity is not present
+  google.protobuf.Any value = 3;  // Null here means that this entity is not present
+}
+
+/* Similar to rich intents. Common patterns are described below:
+
+   1. Multiple entities: {"op": "AND", "items": [<Entity>, ...]}
+
+   2. Ranked entities: [<Entity>, <Entity> ...] */
+message RichEntityLabel {
+  uint32 id = 1;
+  google.protobuf.Any rich_entities = 3;
 }
 
 /* Plain transcription label */
