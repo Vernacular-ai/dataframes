@@ -3,6 +3,7 @@ syntax = "proto3";
 package labels;
 
 import "google/protobuf/any.proto";
+import "records.proto";
 
 /* A simple intent annotation. Intents here are from a fixed set. For marking
    absence of an intent, we use null. We skip label if item is untagged. */
@@ -35,8 +36,15 @@ message Entity {
   google.protobuf.Any value = 3; // Null here means that this entity is not present
 }
 
+/* Plain transcription label */
 message TranscriptionLabel {
   uint32 id = 1;
   string transcription = 2;
-  float score = 3;
+}
+
+/* Ranked transcription label. This is similar to the ones coming from model
+   predictions. */
+message RichTranscriptionLabel {
+  uint32 id = 1;
+  repeated Utterances utterances = 2;
 }
