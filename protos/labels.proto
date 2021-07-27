@@ -22,7 +22,7 @@ message IntentLabel {
       "score": "<>"}, ...] */
 message RichIntentLabel {
   uint32 id = 1;
-  google.protobuf.Any rich_intent = 2;
+  google.protobuf.Any rich_intents = 2;
 }
 
 /* Entities or slots. Can merge multiple entities in one. If they are
