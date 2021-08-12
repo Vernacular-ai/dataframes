@@ -10,8 +10,7 @@ message Call {
                                 // runtime system
   string created_at = 3;        // The time when the call was created
   string virtual_number = 5;    // Receiving phone number
-  string audio_url = 6;
-  string audio_identifier = 7;  // For full call audio.
+  string audio_url = 6;         // For full call audio.
   float duration = 8;           // The duration of the call.
   string flow_version = 9;      // Describes which user goal (inclusive of iterations within the goal) was being followed in the call.
   repeated Turn turns = 10;     // List of interactions between the machine and human. A single interaction is a turn.
