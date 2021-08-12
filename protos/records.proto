@@ -6,23 +6,15 @@ import "google/protobuf/any.proto";
 
 /* Representation of one full call */
 message Call {
-  uint32 id = 1;                // ID as stored in database
-  string uuid = 2;              // UUID generated during object creation in the
+  string id = 1;                // UUID generated during call creation in the
                                 // runtime system
-  string created_at = 3;
-  string caller_number = 4;
+  string created_at = 3;        // The time when the call was created
   string virtual_number = 5;    // Receiving phone number
-  string audio_base_path = 6;
-  string audio_identifier = 7;  // For full call audio. Prepend with
-                                // `audio_base_path`.
-  float duration = 8;
-  string flow_version = 9;
-  repeated Turn turns = 10;
-  string experiment_group = 11;  // Field experimentation group allocation
-                                 // information. Interpretation is left to the
-                                 // user as of now
-                                 // TODO: This needs to be clarified once we
-                                 // upgrade our field testing system.
+  string audio_url = 6;
+  string audio_identifier = 7;  // For full call audio.
+  float duration = 8;           // The duration of the call.
+  string flow_version = 9;      // Describes which user goal (inclusive of iterations within the goal) was being followed in the call.
+  repeated Turn turns = 10;     // List of interactions between the machine and human. A single interaction is a turn.
 }
 
 /* One turn in the call. This can be a bot or user turn. */
