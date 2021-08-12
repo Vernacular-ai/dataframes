@@ -8,7 +8,7 @@ import "records.proto";
 /* A simple intent annotation. Intents here are from a fixed set. For marking
    absence of an intent, we use null. We skip label if item is untagged. */
 message IntentLabel {
-  uint32 id = 1;
+  string id = 1;
   string intent = 2;
 }
 
@@ -21,14 +21,14 @@ message IntentLabel {
    2. Ranked intents: [{"intent": "<>": "score": "<>"}, {"intent": "<>":
       "score": "<>"}, ...] */
 message RichIntentLabel {
-  uint32 id = 1;
+  string id = 1;
   google.protobuf.Any rich_intents = 2;
 }
 
 /* Entities or slots. Can merge multiple entities in one. If they are
    independent, it's recommended to make new layer. */
 message EntityLabel {
-  uint32 id = 1;
+  string id = 1;
   repeated Entity entities = 2;
 }
 
@@ -45,19 +45,19 @@ message Entity {
 
    2. Ranked entities: [<Entity>, <Entity> ...] */
 message RichEntityLabel {
-  uint32 id = 1;
+  string id = 1;
   google.protobuf.Any rich_entities = 3;
 }
 
 /* Plain transcription label */
 message TranscriptionLabel {
-  uint32 id = 1;
+  string id = 1;
   string transcription = 2;
 }
 
 /* Ranked transcription label. This is similar to the ones coming from model
    predictions. */
 message RichTranscriptionLabel {
-  uint32 id = 1;
-  repeated Utterances utterances = 2;
+  string id = 1;
+  repeated records.Utterance utterances = 2;
 }
