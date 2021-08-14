@@ -61,3 +61,9 @@ message RichTranscriptionLabel {
   string id = 1;
   repeated records.Utterance utterances = 2;
 }
+
+message LabeledDataFrame {
+  repeated IntentLabel intents = 1;
+  repeated EntityLabel entities = 2;
+  repeated TranscriptionLabel transcriptions = 3;
+}

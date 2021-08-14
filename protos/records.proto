@@ -68,3 +68,11 @@ message Utterance {
   }
   repeated Alternative alternatives = 1;
 }
+
+message CallDataFrame {
+  repeated Call calls = 1;
+}
+
+message TurnDataFrame {
+  repeated Turn turns = 1;
+}
