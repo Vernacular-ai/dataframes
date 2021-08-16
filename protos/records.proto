@@ -53,7 +53,7 @@ message Intent {
   float score = 2;
   message Slot {
     string name = 1;
-    string type = 2;
+    repeated string type = 2;
     repeated google.protobuf.Any values = 3;
   }
   repeated Slot slots = 3;
