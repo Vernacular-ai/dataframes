@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package records;
 
-import "google/protobuf/any.proto";
 
 /* Representation of one full call */
 message Call {
@@ -48,16 +47,33 @@ message Prediction {
   repeated Intent intents = 1;
 }
 
+message Range {
+  uint32 start = 1;
+  uint32 end = 2;        
+}
+
 message Intent {
   string name = 1;
   float score = 2;
   message Slot {
     string name = 1;
     repeated string type = 2;
-    repeated google.protobuf.Any values = 3;
+    message Value {
+      string body = 1;
+      string type = 2;
+      uint32 alternative_id = 3;
+      oneof value {
+        int64 int_value = 4;
+        float float_value = 5;
+        string string_value = 6;
+      }
+      Range range = 7;
+    }
+    repeated Value values = 3;
   }
   repeated Slot slots = 3;
 }
+
 
 message Utterance {
   message Alternative {
